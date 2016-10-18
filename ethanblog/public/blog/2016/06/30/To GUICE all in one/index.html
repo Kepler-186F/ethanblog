@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GUICE All in One - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="&ldquo;Not enough mana.&rdquo; &ndash;Diablo3 &ldquo;You are right&hellip;.Every project you touched turn into shit&rdquo; &ndash; Nathan Drake, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yoursite.com/blog/2016/06/30/To%20GUICE%20all%20in%20one/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><b>ETHAN'S BLOG</b></a></h1>
+    <h2>"This cow gets stuck in a chair"</h2>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="yoursite.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+    <li><a href="http://ethanwang.me">Goto Ethan's Page</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">GUICE All in One</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-06-30T00:23:00-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:23 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>&ldquo;Not enough mana.&rdquo; &ndash;Diablo3</p>
+
+<p>&ldquo;You are right&hellip;.Every project you touched turn into shit&rdquo; &ndash; Nathan Drake, Uncharted 3</p>
+
+<p>Recently I need to work on some core java projects like Argus (<a href="https://github.com/SalesforceEng/Argus">https://github.com/SalesforceEng/Argus</a>). It uses GUICE, as a classic DI framework. After searched around, there is no good tutorial for beginer to quickly jump in&mdash;all materials seem to be incomplete in some way, include the one provided by google/guice. So I decide to make one myself. Thanks to #rajsarkapally-sfdc helped me.</p>
+
+<p>So this is basic idea
+<img src="/images/img/9-idea.jpg"></p>
+
+<p>Now let&rsquo;s use one example from Otaku&rsquo;s blog</p>
+
+<p>The more I use dependency injection (DI) in my code, the more it alters the way I see both my design and implementation. Injection is so convenient and powerful that you end up wanting to make sure you use it as often as you can. And as it turns out, you can use it in many, many places.
+Let’s cover briefly the most obvious scenarios where DI, and more specifically, Guice, are a good fit: objects created either at class loading time or very early in your application. These two aspects are covered by either direct injection or by providers, which allow you to start building some of your object graph before you can inject more objects. I won’t go too much in details about these two use cases since they are explained in pretty much any Guice tutorial you can find on the net.</p>
+
+<p>Once the injector has created your graph of objects, you are pretty much back to normal and instantiating your “runtime objects” (the objects you create during the life time of your application) the normal way, most likely with “new” or factories. However, you will quickly start noticing that you need some runtime information to create these objects, other parts of them could be injected.</p>
+
+<p>Let’s take the following example: we have a GeoService interface that provides various geolocation functions, such as telling you location if given a person&rsquo;s name:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package com.salesforce.service;
+</span><span class='line'>
+</span><span class='line'>public class GeoService implements GeoServiceInterface{
+</span><span class='line'>  public boolean judge(String Name){
+</span><span class='line'>      System.out.println("juding...");
+</span><span class='line'>      return Name.isEmpty()?false:true;
+</span><span class='line'>  }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you have a Person class which uses this service and also needs a name and an address to be instantiated:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package com.salesforce.kepler;
+</span><span class='line'>import com.google.inject.Inject;
+</span><span class='line'>import com.google.inject.assistedinject.Assisted;
+</span><span class='line'>import com.salesforce.service.GeoServiceInterface;
+</span><span class='line'>
+</span><span class='line'>public class Person implements PersonInterface {
+</span><span class='line'>  private String Name;
+</span><span class='line'>  private GeoServiceInterface gs;
+</span><span class='line'>  
+</span><span class='line'>  private Person(String Name, GeoServiceInterface gs){
+</span><span class='line'>      this.Name=Name;
+</span><span class='line'>      this.gs=gs;
+</span><span class='line'>  }
+</span><span class='line'>  public boolean getLocationByName(){
+</span><span class='line'>      return gs.judge(Name);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Something odd should jump at you right away with this class: while name and address are part of the identity of a Person object, the presence of the GeoService instance in it feels wrong. The service is a singleton that is created on start up, so a perfect candidate to be injected, but how can I achieve the creation of a Person object when some of its information is supplied by Guice and the other part by myself?
+Guice gives you a very elegant and flexible way to implement this scenario with “assisted injection”. (Quote ended here)</p>
+
+<p><img src="/images/img/9-GUICE.jpg"></p>
+
+<p>Above are basic. To use provider.</p>
+
+<p><img src="/images/img/9-Provider.jpg"></p>
+
+<p>So in the end, this is what you need.</p>
+
+<p><img src="/images/img/9-Automatic.jpg"></p>
+
+<p>Links
+<a href="http://stackoverflow.com/questions/9237996/pass-parameter-to-constructor-with-guice">http://stackoverflow.com/questions/9237996/pass-parameter-to-constructor-with-guice</a>
+<a href="https://github.com/google/guice/wiki/ProviderBindings">https://github.com/google/guice/wiki/ProviderBindings</a>
+<a href="http://beust.com/weblog/2012/08/21/advanced-dependency-injection-with-guice/">http://beust.com/weblog/2012/08/21/advanced-dependency-injection-with-guice/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-06-30T00:23:00-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:23 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2016/06/30/To%20GUICE%20all%20in%20one/" data-via="" data-counturl="http://yoursite.com/blog/2016/06/30/To%20GUICE%20all%20in%20one/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/02/29/To%20build%20an%20AI%20like%20never%20before/" title="Previous Post: To build an AI like never before ">&laquo; To build an AI like never before </a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/" title="Next Post: How to design a system to predict future">How to design a system to predict future &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/">How to Design a System to Predict Future</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/06/30/To%20GUICE%20all%20in%20one/">GUICE All in One</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/29/To%20build%20an%20AI%20like%20never%20before/">To Build an AI Like Never Before</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/25/angularJS%20template/">AngularJS Template</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/08/review%20earphone%20equipment/">Why Are There So Many Songs About Rainbow? ---My Journey as an Audiophile</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/07/micro%20service%20template/">Django Micro-services Template</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/22/Where%20did%20preformance%20go/">Where Did Preformance Go? Dive Into Multi-process/multi-threads in CPython</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/20/DFS%20BFS/">Standard DFS and BFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/15/hello-world/">Deploy Octpress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/05/27/SpringVsRails/">Some Comments Regarding Spring vs Rails</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; ethanwang.me -
+  <span class="credit">I use <a href="http://octopress.org">Octopress</a> to set up this blog</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
