@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/</loc>
+    <lastmod>2017-01-09T12:10:00-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/</loc>
     <lastmod>2016-10-23T13:23:00-07:00</lastmod>
   </url>
@@ -48,5 +52,8 @@
   </url>
   <url>
     <loc>http://yoursite.com/super-awesome/</loc>
+  </url>
+  <url>
+    <loc>http://yoursite.com/posts/2/</loc>
   </url>
 </urlset>

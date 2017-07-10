@@ -9,7 +9,7 @@
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="This post is a draft of something fun I&rsquo;m starting to socialize. &ldquo;The Problem&rdquo; This is how this idea gets started: in my day-to-day &hellip;">
+  <meta name="description" content="Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please! &ldquo;Idea&rdquo; Regular bloom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/">Purposing a New BloomFilter Design That Optimized for Hbase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-09T12:10:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please!</p>
+
+<p><strong>&ldquo;Idea&rdquo;</strong></p>
+
+<p>Regular bloom filter has been widely used in HBase and LSM, however in these cases, certain important knowledge of the key space is pre-known but not been take advantage of. Such as:
+1, the MIN/MAX of the keys is pre-known.
+2, the keys are usually densely and continuously sorted within a range.</p>
+
+<p><strong>&ldquo;Issues of regular bloom filter&rdquo;</strong></p>
+
+<p>Current bloom filter makes no the assumptions of the distributions of the incoming objects. After hashing, the hashes is assumed to be evenly distributed among (-int, int).
+Take most popular implementation for example (google/guava.bloomfilter), there are two processes involved: hashing and modulo, as illustrated below. (code link)</p>
+
+<p><img src="/images/img/p1.jpg">
+Fig 1  Two processes for most Bloomfilter implementation. Hashing (fnv or murmur being most popular chooses) and modulo. Modulo operation is usually necessary in order to make hashing range fit into the length of bloom Filter.</p>
+
+<p>Issue is that, no matter which hashing algorithm it choose(fnv or murmur being most popular), a modularization process is usually necessary to fit the size of bloom filter (Such as the Line 61 of com.google.common.hash.BloomFilterStrategies.java code link).</p>
+
+<p>As illustrated below, each bloom filter buckets are not giving the even collision chance therefore yield a sub-optimum collision/space ratio.</p>
+
+<p><img src="/images/img/p2.jpg">
+Fig 2. In this example, range of hashes is [4, 29]. When mod this down to [1,10], we can observe that the range [4, 9] will be &ldquo;visit&rdquo; 3 times while other ranges only 2 times. Therefore the items are denser between [4, 9] on the bloom filter.  Reason of this is that the regular bloom filter don&rsquo;t know the min/max value of the incoming objects ahead of time, therefore can not prepare a good corresponding Hash/modulo process for it.</p>
+
+<p><strong>&ldquo;Improvement from HbaseBloomFilter&rdquo;(purposing)</strong></p>
+
+<p>During memstore flushing time, we know Min/Max of the key space a head of time, we can use this information to prepare a better hash and modulo process that avoid this issue. Illustrated below.</p>
+
+<p><img src="/images/img/p3.jpg"></p>
+
+<p><strong>&ldquo;So How much does it improve?&rdquo;</strong></p>
+
+<p>A naive implementation of this idea is that: once hashing is done, based on min and max hash value re-align them based on the bloom filter length. (just implemented here for experiment use Code Link)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>https://github.com/aertoria/HbaseBloomFilter</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Experiment Result(each experiment result is the average of multiple experiments):</p>
+
+<p>Bloom filter size is 100, fit in 100 values ranging from 1-150. Use identity based hash:
+OldBloomFilter:  Occupied Rate 65%, Collision rate:35%
+NewBloomFilter: Occupied Rate 67%, Collision rate:33% (2% better)</p>
+
+<p>Bloom filter size is 10K, fit in 100 values ranging from 1-10K. Use FNV hash:
+OldBloomFilter:  Occupied Rate 63.22%, Collision rate:36.78%
+NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1190,200 +1264,9 @@ It also very good for circle detecting. I call it standard DFS or S-DFS</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/27/SpringVsRails/">Some Comments Regarding Spring vs Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-05-27T02:00:04-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>2:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For the starters, couple reasons that Spring is better than Ruby on Rails.
-Reason1: Routes Service - Complex routers
-Ruby on Rails
-Given link:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>%a{:href =&gt; export_path} Export_Link</span></code></pre></td></tr></table></div></figure>
-
-
-<p>/config/routes.rb:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   match ‘/export’ =&gt; ‘PatientController#exportservice’
-</span><span class='line'>$rake routes:
-</span><span class='line'>export /export(.:format) {:controller=&gt;”PatientController”, :action=&gt; ”export”}
-</span><span class='line'>/app/controller/patients_controller.rb:
-</span><span class='line'>Class Patientcontroller &lt; ApplicationController
-</span><span class='line'>  def exportservice
-</span><span class='line'>    puts “export executed”  
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Spring
-   Given link:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a href = ‘/dbo/patient/export.html’&gt; Export_link &lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>/dbo/patientController.java:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@Controller
-</span><span class='line'>@RequestMapping("/dbo/patient/\*")
-</span><span class='line'>public class PatientCOntroller extends AbstractDboController{
-</span><span class='line'>  @RequestMapping(value=”export.html”, method=RequestMethod(GET))
-</span><span class='line'>  public ModelAndView exportService(){
-</span><span class='line'>    System.out.println(‘exported excuted’);
-</span><span class='line'>    Return new ModelAndView(“dbo/patient/export.jsp”);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Reason2: Database Service - ActiveRecord vs Hibernate
-Ruby on Rails</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@patients = Patient.all
-</span><span class='line'>@patients.each do |patient|
-</span><span class='line'>    return paitent.paient_name
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Spring</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@Autowired
-</span><span class='line'>private DboDaoService dboDaoService;
-</span><span class='line'>public String function(){
-</span><span class='line'>    return dboDaoService.getPatientService().getPaitent_Name();
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Reason3: Model Initialization - Crazy ruby syntax
-Ruby on Rails
-app/model/patient.rb:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class Patient &lt; ActiveRecord :: Base
-</span><span class='line'>belongs_to :MRN
-</span><span class='line'>  def exportService
-</span><span class='line'>    return “activated”
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>app/controller/patients_controller.rb:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>puts Patient.new.exportService</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Spring
-src/main/java/package/dbo/exporter/patient.java:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@Service
-</span><span class='line'>public class Patient implements PetientService {
-</span><span class='line'>    public String exportService(){
-</span><span class='line'>        return “activated”;
-</span><span class='line'>    }
-</span><span class='line'>}
-</span><span class='line'>src/main/java/package/dbo/exporter/patientService.java:
-</span><span class='line'>public interface PatientService{
-</span><span class='line'>    public String exportService();
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>src/main/java/package//dbo/patientController.java:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@Autowired
-</span><span class='line'>private patientService PatientService
-</span><span class='line'>
-</span><span class='line'>@Controller
-</span><span class='line'>@RequestMapping(“/dbo/patient/\*”)
-</span><span class='line'>public class PatientCOntroller extends AbstractDboController{
-</span><span class='line'>  @RequestMapping(value=”export.html”, method=RequestMethod(GET))
-</span><span class='line'>  public ModelAndView exportService(){
-</span><span class='line'>    System.out.println(patientService.exportService());
-</span><span class='line'>    Return new ModelAndView(“dbo/patient/export.jsp”);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1394,6 +1277,10 @@ src/main/java/package/dbo/exporter/patient.java:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/">Purposing a New BloomFilter Design That Optimized for Hbase</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/">How to Design a System to Predict Future</a>
@@ -1437,8 +1324,7 @@ src/main/java/package/dbo/exporter/patient.java:</p>
     
   </ul>
 </section>
-
-
+Included file 'asides/github.html' not found in _includes directory
 
 
 

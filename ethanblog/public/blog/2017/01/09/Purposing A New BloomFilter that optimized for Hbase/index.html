@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Deploy Octpress - My Octopress Blog</title>
+  <title>Purposing a New BloomFilter Design That Optimized for Hbase - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="To relase me: rysnc then at my root fold do rake genrate rake watch 1
-2
-rake generate
-rake watch ">
+  <meta name="description" content="Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please! &ldquo;Idea&rdquo; Regular bloom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ rake watch ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com/blog/2013/01/15/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -70,7 +67,7 @@ rake watch ">
   
   <header>
     
-      <h1 class="entry-title">Deploy Octpress</h1>
+      <h1 class="entry-title">Purposing a New BloomFilter Design That Optimized for Hbase</h1>
     
     
       <p class="meta">
@@ -79,22 +76,59 @@ rake watch ">
 
 
 
-<time class='entry-date' datetime='2013-01-15T12:19:22-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:19 pm</span></time>
+<time class='entry-date' datetime='2017-01-09T12:10:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:10 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>To relase me:</p>
+<div class="entry-content"><p>Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please!</p>
 
-<p>rysnc then at my root fold do rake genrate rake watch</p>
+<p><strong>&ldquo;Idea&rdquo;</strong></p>
+
+<p>Regular bloom filter has been widely used in HBase and LSM, however in these cases, certain important knowledge of the key space is pre-known but not been take advantage of. Such as:
+1, the MIN/MAX of the keys is pre-known.
+2, the keys are usually densely and continuously sorted within a range.</p>
+
+<p><strong>&ldquo;Issues of regular bloom filter&rdquo;</strong></p>
+
+<p>Current bloom filter makes no the assumptions of the distributions of the incoming objects. After hashing, the hashes is assumed to be evenly distributed among (-int, int).
+Take most popular implementation for example (google/guava.bloomfilter), there are two processes involved: hashing and modulo, as illustrated below. (code link)</p>
+
+<p><img src="/images/img/p1.jpg">
+Fig 1  Two processes for most Bloomfilter implementation. Hashing (fnv or murmur being most popular chooses) and modulo. Modulo operation is usually necessary in order to make hashing range fit into the length of bloom Filter.</p>
+
+<p>Issue is that, no matter which hashing algorithm it choose(fnv or murmur being most popular), a modularization process is usually necessary to fit the size of bloom filter (Such as the Line 61 of com.google.common.hash.BloomFilterStrategies.java code link).</p>
+
+<p>As illustrated below, each bloom filter buckets are not giving the even collision chance therefore yield a sub-optimum collision/space ratio.</p>
+
+<p><img src="/images/img/p2.jpg">
+Fig 2. In this example, range of hashes is [4, 29]. When mod this down to [1,10], we can observe that the range [4, 9] will be &ldquo;visit&rdquo; 3 times while other ranges only 2 times. Therefore the items are denser between [4, 9] on the bloom filter.  Reason of this is that the regular bloom filter don&rsquo;t know the min/max value of the incoming objects ahead of time, therefore can not prepare a good corresponding Hash/modulo process for it.</p>
+
+<p><strong>&ldquo;Improvement from HbaseBloomFilter&rdquo;(purposing)</strong></p>
+
+<p>During memstore flushing time, we know Min/Max of the key space a head of time, we can use this information to prepare a better hash and modulo process that avoid this issue. Illustrated below.</p>
+
+<p><img src="/images/img/p3.jpg"></p>
+
+<p><strong>&ldquo;So How much does it improve?&rdquo;</strong></p>
+
+<p>A naive implementation of this idea is that: once hashing is done, based on min and max hash value re-align them based on the bloom filter length. (just implemented here for experiment use Code Link)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
-</span><span class='line'>rake watch</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>https://github.com/aertoria/HbaseBloomFilter</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Experiment Result(each experiment result is the average of multiple experiments):</p>
+
+<p>Bloom filter size is 100, fit in 100 values ranging from 1-150. Use identity based hash:
+OldBloomFilter:  Occupied Rate 65%, Collision rate:35%
+NewBloomFilter: Occupied Rate 67%, Collision rate:33% (2% better)</p>
+
+<p>Bloom filter size is 10K, fit in 100 values ranging from 1-10K. Use FNV hash:
+OldBloomFilter:  Occupied Rate 63.22%, Collision rate:36.78%
+NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
 </div>
 
 
@@ -110,7 +144,7 @@ rake watch ">
 
 
 
-<time class='entry-date' datetime='2013-01-15T12:19:22-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:19 pm</span></time>
+<time class='entry-date' datetime='2017-01-09T12:10:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:10 pm</span></time>
       
 
 
@@ -118,7 +152,7 @@ rake watch ">
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2013/01/15/hello-world/" data-via="" data-counturl="http://yoursite.com/blog/2013/01/15/hello-world/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/" data-via="" data-counturl="http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/" >Tweet</a>
   
   
   
@@ -127,10 +161,8 @@ rake watch ">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/05/27/SpringVsRails/" title="Previous Post: Some comments regarding Spring VS Rails">&laquo; Some comments regarding Spring VS Rails</a>
+        <a class="basic-alignment left" href="/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/" title="Previous Post: How to design a system to predict future">&laquo; How to design a system to predict future</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/06/20/DFS%20BFS/" title="Next Post: Standard DFS and BFS">Standard DFS and BFS &raquo;</a>
       
     </p>
   </footer>
