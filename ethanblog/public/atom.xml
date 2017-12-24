@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-09T23:26:07-07:00</updated>
+  <updated>2017-12-24T00:16:14-08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Open Search Network - Visioning the Next Generation of Internet Searching]]></title>
+    <link href="http://yoursite.com/blog/2017/11/20/Open%20Search%20Network/"/>
+    <updated>2017-11-20T11:05:00-08:00</updated>
+    <id>http://yoursite.com/blog/2017/11/20/Open Search Network</id>
+    <content type="html"><![CDATA[<p>As the major internet search/indexing system, google has been around for almost a decade now. The way people search and the way indexer index hasn&rsquo;t change much since. Over the years, with the advancement of AI and big data, incremental improvements has been applied which contributes to better accuracy and better customization of search results. However, two fundamental issues still remains:</p>
+
+<p><strong>Two Fundamental Issues</strong></p>
+
+<p>First and foremost, <em>the trust of the quality of information.</em></p>
+
+<p>Let&rsquo;s say for Google, because their revenue model, it is already difficult for them to justify the quality of those search results, such as the rankings. There is a famous &ldquo;do no evil&rdquo; promise, however, after 2016 when blockchain concept become more and more popular, people start to not just satisfy with ethical promises, they learned that to get the highest level of correctness we have to have some form of <em>mathematical proof</em>. Mathematically correct is more trustworthy than Ethically correct.</p>
+
+<p>Secondly, <em>the privacy.</em></p>
+
+<p>Every user asks google therefore google knows everyone. Once the centralized part of this system is compromised (by either hacker or government), it is unavoidable that user will worry about safety of their searching records.</p>
+
+<p>Summing up, the this is the current searching process.
+<img src="http://yoursite.com/images/img/G1.jpg"></p>
+
+<p>&ldquo;The Instinct&rdquo;</p>
+
+<p>These two issues are hard to solve, because <strong>asking a single authority (google) is not the natural way people search for answers</strong>.</p>
+
+<p>Let&rsquo;s look at the bees, each bee communicate with peers, the network optimizes the transportation and processing of information as a whole. So how does people in the natural word search for answers? Let&rsquo;s say you want to know where to find Ethan, you go ask the friends you think are reliable. If your friends don&rsquo;t the answer right of the bat, they will ask their friends (like a recursion). When the answer comes back, collected and aggregated, you will rank the trust of each answers based on the <em>trust of the sources</em>, i.e., those friends. Hence the idea of &ldquo;Open Search Network&rdquo;.</p>
+
+<p>&ldquo;Open Search Network&rdquo;</p>
+
+<p>In the next generation of searching, I envision people broadcast their question to only the direct neighbors, and they broadcast to their neighbors. All the answers this world has will be evaluated and collected based on each person&rsquo;s &ldquo;perspective&rdquo;(see below) to form an answer.</p>
+
+<p><img src="http://yoursite.com/images/img/O1.jpg"></p>
+
+<p>So, for every particular topic, if we assign a number &ldquo;weight&rdquo; to every friends we have, we now have a system to rank the credibility of that information source. For all the future incoming answers, we will use this &ldquo;weight&rdquo; to adjust how much should we trust this answer. Of course we&rsquo;ll adjust these weights as we go, each time an answer get picked or not get picked, the corresponding source becomes more or less trustable (by a little). At the end of the day, every user under every particular topic will have a set of weights. That is called &ldquo;perspective&rdquo; matrix, representing the perspective of how a person view the world nearby.</p>
+
+<p>In action it looks like this:
+<img src="http://yoursite.com/images/img/O2.jpg"></p>
+
+<p>as compare to
+<img src="http://yoursite.com/images/img/G2.jpg"></p>
+
+<p>&ldquo;OK, Now the implementation&rdquo;
+This search solution looks more like Facebook, as it is peer searcher based, i.e., a social network. Let&rsquo;s create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it&rsquo;s owned by that user.</p>
+
+<p>This will be a great open source project.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Purposing a New BloomFilter Design That Optimized for Hbase]]></title>

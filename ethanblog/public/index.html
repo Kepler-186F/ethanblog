@@ -9,7 +9,7 @@
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please! &ldquo;Idea&rdquo; Regular bloom &hellip;">
+  <meta name="description" content="As the major internet search/indexing system, google has been around for almost a decade now. The way people search and the way indexer index hasn& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/20/Open%20Search%20Network/">Open Search Network - Visioning the Next Generation of Internet Searching</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-11-20T11:05:00-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>11:05 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As the major internet search/indexing system, google has been around for almost a decade now. The way people search and the way indexer index hasn&rsquo;t change much since. Over the years, with the advancement of AI and big data, incremental improvements has been applied which contributes to better accuracy and better customization of search results. However, two fundamental issues still remains:</p>
+
+<p><strong>Two Fundamental Issues</strong></p>
+
+<p>First and foremost, <em>the trust of the quality of information.</em></p>
+
+<p>Let&rsquo;s say for Google, because their revenue model, it is already difficult for them to justify the quality of those search results, such as the rankings. There is a famous &ldquo;do no evil&rdquo; promise, however, after 2016 when blockchain concept become more and more popular, people start to not just satisfy with ethical promises, they learned that to get the highest level of correctness we have to have some form of <em>mathematical proof</em>. Mathematically correct is more trustworthy than Ethically correct.</p>
+
+<p>Secondly, <em>the privacy.</em></p>
+
+<p>Every user asks google therefore google knows everyone. Once the centralized part of this system is compromised (by either hacker or government), it is unavoidable that user will worry about safety of their searching records.</p>
+
+<p>Summing up, the this is the current searching process.
+<img src="/images/img/G1.jpg"></p>
+
+<p>&ldquo;The Instinct&rdquo;</p>
+
+<p>These two issues are hard to solve, because <strong>asking a single authority (google) is not the natural way people search for answers</strong>.</p>
+
+<p>Let&rsquo;s look at the bees, each bee communicate with peers, the network optimizes the transportation and processing of information as a whole. So how does people in the natural word search for answers? Let&rsquo;s say you want to know where to find Ethan, you go ask the friends you think are reliable. If your friends don&rsquo;t the answer right of the bat, they will ask their friends (like a recursion). When the answer comes back, collected and aggregated, you will rank the trust of each answers based on the <em>trust of the sources</em>, i.e., those friends. Hence the idea of &ldquo;Open Search Network&rdquo;.</p>
+
+<p>&ldquo;Open Search Network&rdquo;</p>
+
+<p>In the next generation of searching, I envision people broadcast their question to only the direct neighbors, and they broadcast to their neighbors. All the answers this world has will be evaluated and collected based on each person&rsquo;s &ldquo;perspective&rdquo;(see below) to form an answer.</p>
+
+<p><img src="/images/img/O1.jpg"></p>
+
+<p>So, for every particular topic, if we assign a number &ldquo;weight&rdquo; to every friends we have, we now have a system to rank the credibility of that information source. For all the future incoming answers, we will use this &ldquo;weight&rdquo; to adjust how much should we trust this answer. Of course we&rsquo;ll adjust these weights as we go, each time an answer get picked or not get picked, the corresponding source becomes more or less trustable (by a little). At the end of the day, every user under every particular topic will have a set of weights. That is called &ldquo;perspective&rdquo; matrix, representing the perspective of how a person view the world nearby.</p>
+
+<p>In action it looks like this:
+<img src="/images/img/O2.jpg"></p>
+
+<p>as compare to
+<img src="/images/img/G2.jpg"></p>
+
+<p>&ldquo;OK, Now the implementation&rdquo;
+This search solution looks more like Facebook, as it is peer searcher based, i.e., a social network. Let&rsquo;s create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it&rsquo;s owned by that user.</p>
+
+<p>This will be a great open source project.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1227,43 +1294,6 @@ It also very good for circle detecting. I call it standard DFS or S-DFS</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/15/hello-world/">Deploy Octpress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-01-15T12:19:22-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To relase me:</p>
-
-<p>rysnc then at my root fold do rake genrate rake watch</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
-</span><span class='line'>rake watch</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1277,6 +1307,10 @@ It also very good for circle detecting. I call it standard DFS or S-DFS</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/11/20/Open%20Search%20Network/">Open Search Network - Visioning the Next Generation of Internet Searching</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/">Purposing a New BloomFilter Design That Optimized for Hbase</a>

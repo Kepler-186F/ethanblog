@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/blog/2017/11/20/Open%20Search%20Network/</loc>
+    <lastmod>2017-11-20T11:05:00-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/</loc>
     <lastmod>2017-01-09T12:10:00-08:00</lastmod>
   </url>
