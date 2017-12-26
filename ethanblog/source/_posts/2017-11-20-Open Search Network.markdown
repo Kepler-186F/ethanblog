@@ -105,7 +105,7 @@ Sum(weight) for all neighborId = 1
 
 
 ###**Pulling off**
-{% img /images/img/TM.jpg %}
+{% img /images/img/team.jpg %}
 
 This search model looks more like Facebook, as it is peer to peer searcher based, i.e., a social network. Let's create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it's owned by that user.
 

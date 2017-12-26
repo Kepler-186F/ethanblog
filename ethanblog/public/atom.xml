@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-25T19:23:12-08:00</updated>
+  <updated>2017-12-25T19:28:32-08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -146,7 +146,7 @@
 
 <h3><strong>Pulling off</strong></h3>
 
-<p><img src="http://yoursite.com/images/img/TM.jpg"></p>
+<p><img src="http://yoursite.com/images/img/team.jpg"></p>
 
 <p>This search model looks more like Facebook, as it is peer to peer searcher based, i.e., a social network. Let&rsquo;s create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it&rsquo;s owned by that user.</p>
 
