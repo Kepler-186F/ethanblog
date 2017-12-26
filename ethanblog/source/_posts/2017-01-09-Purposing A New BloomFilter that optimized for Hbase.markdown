@@ -1,23 +1,23 @@
 ---
 layout: post
-title: "Purposing A New BloomFilter Design that optimized for Hbase"
+title: "Purposing A New BloomFilter Design that optimized for Apache Hbase"
 date: 2017-01-09 12:10:00 -0800
 comments: true
 categories:
 ---
-Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please!
+Got this idea when last week discuss with Rahul Gidwani from Salesforce about bloom filters. Put up some draft here, feedback goes to apache hbase dev list.
 
 
-__"Idea"__
+###__the "Idea"__
 
 Regular bloom filter has been widely used in HBase and LSM, however in these cases, certain important knowledge of the key space is pre-known but not been take advantage of. Such as:
 1, the MIN/MAX of the keys is pre-known.
 2, the keys are usually densely and continuously sorted within a range.
 
 
-__"Issues of regular bloom filter"__
+###__Issues of regular bloom filter__
 
-Current bloom filter makes no the assumptions of the distributions of the incoming objects. After hashing, the hashes is assumed to be evenly distributed among (-int, int). 
+Current bloom filter makes no the assumptions of the distributions of the incoming objects. After hashing, the hashes is assumed to be evenly distributed among (-int, int).
 Take most popular implementation for example (google/guava.bloomfilter), there are two processes involved: hashing and modulo, as illustrated below. (code link)
 
 {% img /images/img/p1.jpg %}
@@ -36,7 +36,7 @@ Fig 2. In this example, range of hashes is [4, 29]. When mod this down to [1,10]
 
 
 
-__"Improvement from HbaseBloomFilter"(purposing)__
+###__Improvement from HbaseBloomFilter (purposing)__
 
 During memstore flushing time, we know Min/Max of the key space a head of time, we can use this information to prepare a better hash and modulo process that avoid this issue. Illustrated below.
 
@@ -44,7 +44,7 @@ During memstore flushing time, we know Min/Max of the key space a head of time, 
 
 
 
-__"So How much does it improve?"__
+###__So How much does it improve?__
 
 A naive implementation of this idea is that: once hashing is done, based on min and max hash value re-align them based on the bloom filter length. (just implemented here for experiment use Code Link)
 ```

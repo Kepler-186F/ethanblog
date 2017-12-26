@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-24T00:16:14-08:00</updated>
+  <updated>2017-12-25T19:03:01-08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,30 +18,50 @@
     <link href="http://yoursite.com/blog/2017/11/20/Open%20Search%20Network/"/>
     <updated>2017-11-20T11:05:00-08:00</updated>
     <id>http://yoursite.com/blog/2017/11/20/Open Search Network</id>
-    <content type="html"><![CDATA[<p>As the major internet search/indexing system, google has been around for almost a decade now. The way people search and the way indexer index hasn&rsquo;t change much since. Over the years, with the advancement of AI and big data, incremental improvements has been applied which contributes to better accuracy and better customization of search results. However, two fundamental issues still remains:</p>
+    <content type="html"><![CDATA[<p><strong><em>&ldquo;Many do what they need, some do what they want&rdquo;</em></strong>  &ndash;  Alfa Romeo&rsquo;s commercial</p>
 
-<p><strong>Two Fundamental Issues</strong></p>
+<p>Ever since Google start indexing the internet from 1998, the way people do searches hasn&rsquo;t change much since. (Read this paper to see how does page rank work today)</p>
 
-<p>First and foremost, <em>the trust of the quality of information.</em></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf</span></code></pre></td></tr></table></div></figure>
 
-<p>Let&rsquo;s say for Google, because their revenue model, it is already difficult for them to justify the quality of those search results, such as the rankings. There is a famous &ldquo;do no evil&rdquo; promise, however, after 2016 when blockchain concept become more and more popular, people start to not just satisfy with ethical promises, they learned that to get the highest level of correctness we have to have some form of <em>mathematical proof</em>. Mathematically correct is more trustworthy than Ethically correct.</p>
+
+<p><img src="http://yoursite.com/images/img/G0.jpg"></p>
+
+<p>Over the years, the scale of data that allowed to be processed has been improved, along with the advancement of AI, these brought us the incremental improvements to better accuracy of search results. However, two fundamental issues still remains:</p>
+
+<h3><strong>Two Fundamental Issues</strong></h3>
+
+<p>First and foremost, <em>user&rsquo;s trust for the quality of information.</em></p>
+
+<p>Let&rsquo;s say for Google, because their revenue model, it is already difficult to justify the quality of those search results, such as the which result should be ranked higher. Then there is a famous &ldquo;do no evil&rdquo; promise. However, after 2016 when blockchain concept become more and more popular (Read this famous Satoshi Nakamoto&rsquo;s paper),</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>https://bitcoin.org/bitcoin.pdf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>people start to not just satisfy with ethical promises, they learned that to get the highest level of consensus, we have to reply on some form of <em>mathematical proof</em>. <strong>Ethically correct is not enough, people want mathematically correct.</strong></p>
 
 <p>Secondly, <em>the privacy.</em></p>
 
-<p>Every user asks google therefore google knows everyone. Once the centralized part of this system is compromised (by either hacker or government), it is unavoidable that user will worry about safety of their searching records.</p>
+<p>Every user asks google therefore google knows everyone. Once the centralized part of this system is compromised (by either a hacker or a government), it is unavoidable that user should start worry about safety of their searching records, due to a centralized system like this:
+<img src="http://yoursite.com/images/img/G1.jpg" width="400" height="450"></p>
 
-<p>Summing up, the this is the current searching process.
-<img src="http://yoursite.com/images/img/G1.jpg"></p>
-
-<p>&ldquo;The Instinct&rdquo;</p>
+<h3><strong>The Instinct to Solve</strong></h3>
 
 <p>These two issues are hard to solve, because <strong>asking a single authority (google) is not the natural way people search for answers</strong>.</p>
 
-<p>Let&rsquo;s look at the bees, each bee communicate with peers, the network optimizes the transportation and processing of information as a whole. So how does people in the natural word search for answers? Let&rsquo;s say you want to know where to find Ethan, you go ask the friends you think are reliable. If your friends don&rsquo;t the answer right of the bat, they will ask their friends (like a recursion). When the answer comes back, collected and aggregated, you will rank the trust of each answers based on the <em>trust of the sources</em>, i.e., those friends. Hence the idea of &ldquo;Open Search Network&rdquo;.</p>
+<p>Let&rsquo;s look at the bees, each bee communicate with peers, the network optimizes the transportation and processing of information as a whole. So how does people in the natural word search for answers? Let&rsquo;s say you want to know where to find Ethan, you go ask those friends you think are reliable. If your friends don&rsquo;t have the answer right of the bat, they will ask their friends for help, so on so forth like a recursion. When the answer comes back, the are collected and aggregated, that&rsquo;s when you will rank the trust of each answers based on the <strong><em>credibility of the peers</em></strong>, not the <strong><em>credibility of the sources</em></strong>. Hence the idea of &ldquo;Open Search Network&rdquo;. Ultimately, the sources (like stackoverflow.com) will also become one of the peers as well, but they are just not the whole of it.</p>
 
-<p>&ldquo;Open Search Network&rdquo;</p>
+<p>In real world, people communicate peers for information. The technology advancements enables us to be able to scan through tons of information in sub-seconds, but the bandwidth of information that a fresh human being is able to interface hasn&rsquo;t improve much. During thousands years of evolution, people learned to evaluate the source first then apply the trust on it moving forward. How wide is this interface&hellip;. Robin Dunbar (see this wiki) has a number to quantifies exactly this. Let&rsquo;s start from there.</p>
 
-<p>In the next generation of searching, I envision people broadcast their question to only the direct neighbors, and they broadcast to their neighbors. All the answers this world has will be evaluated and collected based on each person&rsquo;s &ldquo;perspective&rdquo;(see below) to form an answer.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>https://en.wikipedia.org/wiki/Dunbar%27s_number</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong>Open Search Network</strong></h3>
+
+<p>In the next generation of searching, I envision people broadcast their question to only the direct neighbors, and they broadcast to their neighbors. All the answers collected from the outside world will be evaluated and sent back to user the same path they fan out, weighted on each person&rsquo;s &ldquo;perspective&rdquo;(see below) to form an ranked answer.</p>
 
 <p><img src="http://yoursite.com/images/img/O1.jpg"></p>
 
@@ -50,30 +70,104 @@
 <p>In action it looks like this:
 <img src="http://yoursite.com/images/img/O2.jpg"></p>
 
-<p>as compare to
-<img src="http://yoursite.com/images/img/G2.jpg"></p>
+<h3>Page ranking with collective filter vs OSN</h3>
 
-<p>&ldquo;OK, Now the implementation&rdquo;
-This search solution looks more like Facebook, as it is peer searcher based, i.e., a social network. Let&rsquo;s create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it&rsquo;s owned by that user.</p>
+<p>Google&rsquo;s search reply on a set of sources, with the collective filter account for peers that may be similar, but that&rsquo;s still just half of OSN has. In this process, page ranking is done as the following:</p>
 
-<p>This will be a great open source project.</p>
+<p><img src="http://yoursite.com/images/img/f13.jpg" width="300" height="50"></p>
+
+<p>in which, R(u) is the page rank assigned, E is the array of web pages that corresponds to a source of rank.</p>
+
+<p>If we let S be as follows almost any vector over Web pages (E.g., E), Then the page rank can be computed in this loop, (referred from that paper)</p>
+
+<p><img src="http://yoursite.com/images/img/f14.jpg" width="300" height="300"></p>
+
+<p>There are two observations here, for one, no information of user-user&rsquo;s peer is involved; and two, the rank is tagged to each source. But a source can be more fond to one user but not the others. To solve that, let&rsquo;s see how OSN&rsquo;s matrix gets updated.</p>
+
+<p>Essentially, to evaluate <strong><em>how one bad answer changes one person&rsquo;s perspective towards that source, is a problem of partial derivative.</em></strong>, hence, let&rsquo;s picture something like this: In ANN, how does a feedback adjust the weight matrix of network, is essentially updating the network with:</p>
+
+<p><img src="http://yoursite.com/images/img/NF1.jpg" width="200" height="40"></p>
+
+<p>the change of result applies feedback to the of network, straight forward.</p>
+
+<p>Fast forward to result, updating weight matrix in OSN is very alike to updating weight matrix in ANN, which described here.</p>
+
+<p><img src="http://yoursite.com/images/img/NF4.jpg"></p>
+
+<p>Read this</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://www.cs.cornell.edu/courses/cs5740/2016sp/resources/backprop.pdf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Refer to this, <a href="https://github.com/aertoria/OSN,">https://github.com/aertoria/OSN,</a> each user will have a matrix looks like below</p>
+
+<p>| Topic        | neighborId     | Weight  |</p>
+
+<table>
+<thead>
+<tr>
+<th> &mdash;&mdash;&mdash;&mdash;- </th>
+<th>:&mdash;&mdash;&mdash;&mdash;-:</th>
+<th> &mdash;&ndash;:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> t1      </td>
+<td> n1 </td>
+<td> 0.65 </td>
+</tr>
+<tr>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+</tr>
+<tr>
+<td> t1      </td>
+<td> n2      </td>
+<td>   0.35 </td>
+</tr>
+<tr>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+</tr>
+<tr>
+<td> t2 </td>
+<td> n1      </td>
+<td>    1.00 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Sum(weight) for all neighborId = 1</p>
+
+<h3><strong>Pulling off</strong></h3>
+
+<p><img src="http://yoursite.com/images/img/TM.jpg"></p>
+
+<p>This search model looks more like Facebook, as it is peer to peer searcher based, i.e., a social network. Let&rsquo;s create something called Open Search Engine Agent, a daemon thread that broadcast and route the answers on behalf of each user. This thing can run in cloud, but not necessary, since ultimately it&rsquo;s owned by that user.</p>
+
+<p>Posting this idea since I want it to start as another open source project&hellip;search on.</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Purposing a New BloomFilter Design That Optimized for Hbase]]></title>
+    <title type="html"><![CDATA[Purposing a New BloomFilter Design That Optimized for Apache Hbase]]></title>
     <link href="http://yoursite.com/blog/2017/01/09/Purposing%20A%20New%20BloomFilter%20that%20optimized%20for%20Hbase/"/>
     <updated>2017-01-09T12:10:00-08:00</updated>
     <id>http://yoursite.com/blog/2017/01/09/Purposing A New BloomFilter that optimized for Hbase</id>
-    <content type="html"><![CDATA[<p>Got this idea when last week discuss with Rahul G about bloom filters. Put up some draft here, feedback please!</p>
+    <content type="html"><![CDATA[<p>Got this idea when last week discuss with Rahul Gidwani from Salesforce about bloom filters. Put up some draft here, feedback goes to apache hbase dev list.</p>
 
-<p><strong>&ldquo;Idea&rdquo;</strong></p>
+<h3><strong>the &ldquo;Idea&rdquo;</strong></h3>
 
 <p>Regular bloom filter has been widely used in HBase and LSM, however in these cases, certain important knowledge of the key space is pre-known but not been take advantage of. Such as:
 1, the MIN/MAX of the keys is pre-known.
 2, the keys are usually densely and continuously sorted within a range.</p>
 
-<p><strong>&ldquo;Issues of regular bloom filter&rdquo;</strong></p>
+<h3><strong>Issues of regular bloom filter</strong></h3>
 
 <p>Current bloom filter makes no the assumptions of the distributions of the incoming objects. After hashing, the hashes is assumed to be evenly distributed among (-int, int).
 Take most popular implementation for example (google/guava.bloomfilter), there are two processes involved: hashing and modulo, as illustrated below. (code link)</p>
@@ -88,13 +182,13 @@ Fig 1  Two processes for most Bloomfilter implementation. Hashing (fnv or murmur
 <p><img src="http://yoursite.com/images/img/p2.jpg">
 Fig 2. In this example, range of hashes is [4, 29]. When mod this down to [1,10], we can observe that the range [4, 9] will be &ldquo;visit&rdquo; 3 times while other ranges only 2 times. Therefore the items are denser between [4, 9] on the bloom filter.  Reason of this is that the regular bloom filter don&rsquo;t know the min/max value of the incoming objects ahead of time, therefore can not prepare a good corresponding Hash/modulo process for it.</p>
 
-<p><strong>&ldquo;Improvement from HbaseBloomFilter&rdquo;(purposing)</strong></p>
+<h3><strong>Improvement from HbaseBloomFilter (purposing)</strong></h3>
 
 <p>During memstore flushing time, we know Min/Max of the key space a head of time, we can use this information to prepare a better hash and modulo process that avoid this issue. Illustrated below.</p>
 
 <p><img src="http://yoursite.com/images/img/p3.jpg"></p>
 
-<p><strong>&ldquo;So How much does it improve?&rdquo;</strong></p>
+<h3><strong>So How much does it improve?</strong></h3>
 
 <p>A naive implementation of this idea is that: once hashing is done, based on min and max hash value re-align them based on the bloom filter length. (just implemented here for experiment use Code Link)</p>
 
@@ -115,13 +209,15 @@ NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to Design a System to Predict Future]]></title>
+    <title type="html"><![CDATA[How to Design a Time Machine to Predict Future]]></title>
     <link href="http://yoursite.com/blog/2016/10/23/Design%20a%20system%20to%20predict%20future/"/>
     <updated>2016-10-23T13:23:00-07:00</updated>
     <id>http://yoursite.com/blog/2016/10/23/Design a system to predict future</id>
-    <content type="html"><![CDATA[<p>This post is a draft of something fun I&rsquo;m starting to socialize.</p>
+    <content type="html"><![CDATA[<p>This post is a draft of something I want to build, a time machine, a system allows information to traverse through time.</p>
 
-<p>&ldquo;The Problem&rdquo;</p>
+<p><img src="http://yoursite.com/images/img/t.jpg"></p>
+
+<h2>&ldquo;The Problem&rdquo;</h2>
 
 <p>This is how this idea gets started: in my day-to-day job, we deal with lots of application servers and database servers. At the center of it, here is the gist: the connection between app server and db server is critical because it directly impacts customer. However, the request that comes down from an app server, due to all sorts of unpredictable reasons, often ends up not reaching the db end. Some times they just got lost, some times they got abandoned.</p>
 
@@ -141,7 +237,7 @@ NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
 
 <p>The take away of first video is the following: &ldquo;the particle changes its behavior simply because of &lsquo;aware&rsquo; of being watched&rdquo;</p>
 
-<p>Nest, this one:</p>
+<p>Next, this one:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>https://www.youtube.com/watch?v=H6HLjpj4Nt4</span></code></pre></td></tr></table></div></figure>
@@ -151,7 +247,7 @@ NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
 
 <p>So to sum up, below is a prototype of the system, and has been proved will be functioning, as quoted from this third video(<a href="https://www.youtube.com/watch?v=DsxA7OU7fR0">https://www.youtube.com/watch?v=DsxA7OU7fR0</a>)</p>
 
-<p>&ldquo;The Design&rdquo;</p>
+<h2>&ldquo;The Design&rdquo;</h2>
 
 <p>First we have a particle gun, shooting electrons(or photons) through a double-slit barrier and landing on a screen. Both screen and each slit will have a detector connecting to a computer. The detectors attached at each slit will stay on at all time. And their data is constantly being collected by a computer. As in initial state, the screen will show a two-bands, because observer knowledge is collected constantly being collected.</p>
 
@@ -161,7 +257,7 @@ NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
 
 <p><img src="http://yoursite.com/images/img/m1.jpg"></p>
 
-<p>&ldquo;An Application&rdquo;</p>
+<h2>&ldquo;An Application&rdquo;</h2>
 
 <p>Detector reading is the end that will be carried by our application. Those bits will be packaged into small units, attached with each AppServer-To-DbServer-Request. If customers request can successfully reach the destination, so does the predictor bits. Therefore we should have reading a double-band on screen long before. And vice versa, if the screen starts showing a interference pattern, we will know for sure that soon the connection will broke somewhere, guaranteed.</p>
 
@@ -174,9 +270,11 @@ NewBloomFilter: Occupied Rate 62.72%, Collision rate:37.28% (0.5% worse)</p>
     <link href="http://yoursite.com/blog/2016/06/30/To%20GUICE%20all%20in%20one/"/>
     <updated>2016-06-30T00:23:00-07:00</updated>
     <id>http://yoursite.com/blog/2016/06/30/To GUICE all in one</id>
-    <content type="html"><![CDATA[<p>&ldquo;Not enough mana.&rdquo; &ndash;Diablo3</p>
+    <content type="html"><![CDATA[<p><strong><em>&ldquo;Not enough mana.&rdquo;</em></strong> &ndash;Diablo3</p>
 
-<p>&ldquo;You are right&hellip;.Every project you touched turn into shit&rdquo; &ndash; Nathan Drake, Uncharted 3</p>
+<p><strong><em>&ldquo;You are right&hellip;.Every project you touched turn into shit&rdquo;</em></strong> &ndash; Nathan Drake, Uncharted 3</p>
+
+<p>Yes that project is Argus, from Salesforce.</p>
 
 <p>Recently I need to work on some core java projects like Argus (<a href="https://github.com/SalesforceEng/Argus">https://github.com/SalesforceEng/Argus</a>). It uses GUICE, as a classic DI framework. After searched around, there is no good tutorial for beginer to quickly jump in&mdash;all materials seem to be incomplete in some way, include the one provided by google/guice. So I decide to make one myself. Thanks to #rajsarkapally-sfdc helped me.</p>
 
@@ -238,7 +336,7 @@ Let’s cover briefly the most obvious scenarios where DI, and more specifically
 </span><span class='line'>public class Person implements PersonInterface {
 </span><span class='line'>  private String Name;
 </span><span class='line'>  private GeoServiceInterface gs;
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  private Person(String Name, GeoServiceInterface gs){
 </span><span class='line'>      this.Name=Name;
 </span><span class='line'>      this.gs=gs;
@@ -274,32 +372,31 @@ Guice gives you a very elegant and flexible way to implement this scenario with 
     <link href="http://yoursite.com/blog/2016/02/29/To%20build%20an%20AI%20like%20never%20before/"/>
     <updated>2016-02-29T23:23:00-08:00</updated>
     <id>http://yoursite.com/blog/2016/02/29/To build an AI like never before</id>
-    <content type="html"><![CDATA[<p>JUST a draft&hellip;&hellip;Feb29 night</p>
+    <content type="html"><![CDATA[<p>JUST a draft&hellip;&hellip; it goes to in memorization of Shailesh</p>
 
 <p>Ideas about AI.</p>
 
-<p>1, during evolotion, human has this skill of transfer information into knowledge. But is running on a slow crappy computer(brain) with low memory and horrible inter-connection. &hellip;if it can be simulated on modern computer, with computer&rsquo;s high inter-connection and spped, will be supper.
-2, Right now, All AI development I learned so far are based on mathmatic. From English langurage sentiment catogrizing to picture pattern matching&hellip;.those ANN or SVM are all based on mathmatic logic reasoning and caculation. Those are not the way when I learn stuff and get intelligence.</p>
+<p>1, during evolution, human has this skill of transfer information into knowledge. But is running on a slow crappy computer(brain) with low memory and horrible inter-connection. &hellip;if it can be simulated on modern computer, with computer&rsquo;s high inter-connection and speed, will be supper.
+2, Right now, All AI development I learned so far are based on mathematic. From English language sentiment categorizing to picture pattern matching&hellip;.those ANN or SVM are all based on mathematic logic reasoning and calculation. Those are not the way when I learn stuff and get intelligence.</p>
 
 <p>Therefore,</p>
 
-<p>Yesturday, I consiousely trying hard to record the process of how I learning a new thing&hellip;..So that I may be able to see the process of
-how do normal people transfer infomation into knowledge when they learn a new thing&hellip;..I think this is a key piece that is missing to make AI really work.
-So I learned a new terminlogy called Selenium. And this is what I recorded:
+<p>Yesterday, I consciously trying hard to record the process of how I learning a new thing&hellip;..So that I may be able to see the process of
+how do normal people transfer information into knowledge when they learn a new thing&hellip;..I think this is a key piece that is missing to make AI really work.
+So I learned a new terminology called Selenium. And this is what I recorded:
 1, I remember I heard it years ago.
-2, I saw on web there is a digram, three layer, selenium is in the middle. So I know it&rsquo;s a key thing that connceting up and down.
+2, I saw on web there is a digram, three layer, selenium is in the middle. So I know it&rsquo;s a key thing that connecting up and down.
 Therefore I decide to learn this Selenium.
 So far, What I did was, I try to draw a structure diagram/picture in my head. And now when I keep reading things about this Selenium,</p>
 
 <p>I try to PLACE this selenium into that structure.
 And, during that, for every new piece of info I got, I was also trying to fit it so that I&rsquo;m also validating the correctness of
-that structrue.
-Based on this process, I think I should build an AI, not purly mathmatical based(like traditional deep learning(ANN)), but this way</p>
+that structure.
+Based on this process, I think I should build an AI, not purely mathematical based(like traditional deep learning(ANN)), but this way</p>
 
 <p>Step 1: crawling web and dig out a new terminology
 Step 2: read about this terminology and trying to place it into a network diagram, whilst also validating/revising the digram itself.
-Step 3: Repeat from Step 1
-I&rsquo;m going talk this with Shahlesh about this idea tomorrow</p>
+Step 3: Repeat from Step 1</p>
 ]]></content>
   </entry>
   

@@ -5,10 +5,11 @@ date: 2016-06-29 23:23:00 -0800
 comments: true
 categories:
 ---
-"Not enough mana." --Diablo3
+***"Not enough mana."*** --Diablo3
 
-"You are right....Every project you touched turn into shit" -- Nathan Drake, Uncharted 3
+***"You are right....Every project you touched turn into shit"*** -- Nathan Drake, Uncharted 3
 
+Yes that project is Argus, from Salesforce.
 
 Recently I need to work on some core java projects like Argus (https://github.com/SalesforceEng/Argus). It uses GUICE, as a classic DI framework. After searched around, there is no good tutorial for beginer to quickly jump in---all materials seem to be incomplete in some way, include the one provided by google/guice. So I decide to make one myself. Thanks to #rajsarkapally-sfdc helped me.
 
@@ -49,7 +50,7 @@ import com.salesforce.service.GeoServiceInterface;
 public class Person implements PersonInterface {
 	private String Name;
 	private GeoServiceInterface gs;
-	
+
 	private Person(String Name, GeoServiceInterface gs){
 		this.Name=Name;
 		this.gs=gs;
