@@ -6,8 +6,7 @@ comments: true
 categories:
 ---
 
-***"Many do what they need, some do what they want"***  --  Alfa Romeo's commercial
-
+***"Many do what they need, some do what they want"***  --  Rajsarkapally S. (Salesforce)
 
 
 Ever since Google start indexing the internet from 1998, the way people do searches hasn't change much since. (Read this paper to see how does page rank work today)
